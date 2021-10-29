@@ -46,11 +46,14 @@
       <template v-if="!Array.isArray(value)">
         {{idx + 1}} - {{prop}} = {{value}}
       </template>
-      <ul v-else>
-        <li v-for="(nota, notaIdx) in value">
-          Nota {{notaIdx + 1}} = {{nota}}
-        </li>
-      </ul>
+      <template v-else>
+        Notas
+        <ul>
+          <li v-for="(nota, notaIdx) in value">
+            Nota {{notaIdx + 1}} = {{nota}}
+          </li>
+        </ul>
+      </template>
     </li>
   </ul>
 </div>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Matador de Monstro</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600" rel="stylesheet">
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="panel scores">
+            <div class="score">
+                <h1>Jogador</h1>
+                <div class="life-bar">
+                    <div class="life" :style="progressBar('char')" :class="{danger: charInfo.life <= 20}"></div>
+                </div>
+                <div>{{charInfo.life}}%</div>
+            </div>
+            <div class="score">
+                <h1>Monstro</h1>
+                <div class="life-bar">
+                    <div class="life" :style="progressBar('monster')" :class="{danger: monsterInfo.life <= 20}"></div>
+                </div>
+                <div>{{monsterInfo.life}}%</div>
+            </div>
+        </div>
+        <div v-if="isFinished" class="panel result">
+            <template v-if="!draw">
+                <div class="win" v-if="playerWin">Você ganhou!!! :)</div>
+                <div class="lose" v-else>Você perdeu! :(</div>
+            </template>
+            <div class="draw" v-else>Empatou :|</div>
+
+        </div>
+        <div class="panel buttons">
+            <template v-if="playing && !isFinished">
+                <button @click="() => attack()" class="btn attack">Ataque</button>
+                <button class="btn especial-attack" @click="() => attack(true)">Ataque Especial</button>
+                <button class="btn heal" @click="heal">Curar</button>
+                <button @click="giveUp" class="btn give-up">Desistir</button>
+            </template>
+            <button v-else @click="() => isFinished ? giveUp() : startGame()" class="btn new-game">Iniciar {{isFinished ? 'novo' : ''}} Jogo</button>
+        </div>
+        <div v-if="gameTimeline.length" class="panel logs">
+            <ul>
+                <template v-for="round in gameTimeline">
+                    <li class="monster">{{round.monster.msg}}</li>
+                    <li class="player">{{round.char.msg}}</li>
+                </template>
+            </ul>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
