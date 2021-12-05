@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Instâncias</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600" rel="stylesheet">
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="app">
+        
+    </div>
+    <script>
+        const vm = new Vue({
+            template: `
+            <div>
+                <h1>{{ aula }}</h1>
+                <h2>{{ modulo }}</h2>
+                <button @click="alterarAula">Alterar aula</button>
+                <button @click="alterarModulo">Alterar modulo</button>
+            </div>
+            `,
+            data: {
+                aula: 'Aula: Montando instancia Vue',
+                modulo: 'Modulo: Instancia Vue'
+            },
+            methods: {
+                alterarAula() {
+                    this.aula += '#'
+                },
+                alterarModulo() {
+                    this.modulo += '#'
+                }
+            }
+        })
+
+
+        console.log(vm)
+        console.log(vm.$refs)
+        console.log(vm.$refs.aulaTitulo)
+
+        // vm.$mount('#app')
+        vm.$mount()
+        document.querySelector('#app').appendChild(vm.$el)
+        
+    </script>
+</body>
+</html>

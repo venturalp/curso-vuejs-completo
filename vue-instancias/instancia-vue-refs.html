@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Instâncias</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600" rel="stylesheet">
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <h1 ref="aulaTitulo">{{ aula }}</h1>
+        <h2>{{ modulo }}</h2>
+        <button @click="alterarAula">Alterar aula</button>
+        <button @click="alterarModulo">Alterar modulo</button>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                aula: 'Aula: usando refs',
+                modulo: 'Modulo: Instancia Vue'
+            },
+            methods: {
+                alterarAula() {
+                    this.aula += '#'
+                },
+                alterarModulo() {
+                    this.modulo += '#'
+                }
+            }
+        })
+
+
+        console.log(vm)
+        console.log(vm.$refs)
+        console.log(vm.$refs.aulaTitulo)
+        
+    </script>
+</body>
+</html>
